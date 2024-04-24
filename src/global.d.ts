@@ -1,17 +1,25 @@
-interface WeatherData {
+interface AQIData {
   city: string;
-  temperature: number;
-  humidity: number;
-  wind: number;
-  rain: number;
   aqi: number;
-  idx: number;
-  attributions: Attribution[];
   dominentpol: string;
-  iaqi: IAQI;
-  time: Time;
   forecast: Forecast;
-  debug: Debug;
+}
+
+interface Forecast {
+  daily: DailyForecast;
+}
+
+interface DailyForecast {
+  pm10: AirQualityForecast[];
+  pm25: AirQualityForecast[];
+  o3: AirQualityForecast[];
+}
+
+interface AirQualityForecast {
+  avg: number;
+  day: string;
+  max: number;
+  min: number;
 }
 
 interface Attribution {
@@ -42,24 +50,6 @@ interface Time {
   tz: string;
   v: number;
   iso: string;
-}
-
-interface Forecast {
-  daily: DailyForecast;
-}
-
-interface DailyForecast {
-  o3: AirQualityForecast[];
-  pm10: AirQualityForecast[];
-  pm25: AirQualityForecast[];
-  uvi: AirQualityForecast[];
-}
-
-interface AirQualityForecast {
-  avg: number;
-  day: string;
-  max: number;
-  min: number;
 }
 
 interface Debug {

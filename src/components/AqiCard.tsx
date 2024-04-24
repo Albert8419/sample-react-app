@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WeatherData, getWeatherData } from "../api/actions";
+import { AQIData, getAQIData } from "../api/actions"; // Updated import
 import {
   Card,
   CardHeader,
@@ -11,15 +11,15 @@ import {
 } from "@nextui-org/react";
 import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
 
-const WeatherCard: React.FC = () => {
-  const [data, setData] = useState<WeatherData>();
+const Aqicard: React.FC = () => { // Renamed component
+  const [data, setData] = useState<AQIData>(); // Updated type
   const [loadingState, setLoadingState] = useState(false);
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
     setLoadingState(true);
-    getWeatherData(city)
+    getAQIData(city) // Updated function
       .then((res) => {
         setError("");
         setData(res);
@@ -27,7 +27,7 @@ const WeatherCard: React.FC = () => {
       .catch((error) => {
         console.error(error);
         setData(undefined);
-        setError("Error fetching weather data");
+        setError("Error fetching AQI data"); // Updated error message
       })
       .finally(() => {
         setLoadingState(false);
@@ -68,21 +68,18 @@ const WeatherCard: React.FC = () => {
         <CardBody>
           <div className="flex flex-col items-center">
             <h1 className="text-3xl font-bold">{data.city}</h1>
-            <p className="text-3xl font-bold">{data.temperature}°C</p>
-            {data.temperature > 20 ? (
-              <TiWeatherSunny className="w-36 h-36" />
-            ) : (
+            <p className="text-3xl font-bold">{data.aqi}</p> {/* Updated data */}
+            {/* Updated condition */}
+            {data.aqi > 50 ? (
               <TiWeatherDownpour className="w-36 h-36" />
+            ) : (
+              <TiWeatherSunny className="w-36 h-36" />
             )}
-            <p className="text-lg">Humidity: {data.humidity}%</p>
-            <p className="text-lg">Wind: {data.wind} km/h</p>
-            <p className="text-lg">Rain: {data.rain} %</p>
-            <p className="text-lg">AQI: {data.aqi}</p>
             <p className="text-lg">Dominent Pollutant: {data.dominentpol}</p>
+            {/* Additional AQI-specific data */}
             <p className="text-lg">PM10 Avg: {data.pm10avg}</p>
             <p className="text-lg">PM25 Avg: {data.pm25avg}</p>
             <p className="text-lg">O3 Avg: {data.o3avg}</p>
-
           </div>
         </CardBody>
       ) : (
@@ -108,4 +105,4 @@ const WeatherCard: React.FC = () => {
   );
 };
 
-export default WeatherCard;
+export default Aqicard;

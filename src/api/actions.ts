@@ -16,10 +16,6 @@ export interface AQIData {
 
 export interface WeatherData {
   city: string;
-  temperature: number;
-  humidity: number;
-  wind: number;
-  rain: number;
   aqi: number;
   dominentpol: string;
   pm10avg: number;
@@ -32,28 +28,10 @@ const fetchAQIData = async (city: string): Promise<AQIData> => {
   return response.data.data;
 };
 
-export const getWeatherData = async (city: string): Promise<WeatherData> => {
+export const getAQIData = async (city: string): Promise<AQIData> => {
   try {
-    const weatherResponse = await axios.get(`${API_BASE_URL}/weather/${city}`);
-    const { temperature, humidity, wind, rain } = weatherResponse.data;
     const aqiData = await fetchAQIData(city);
-    const { aqi, dominentpol } = aqiData;
-    const pm10avg = aqiData.forecast.daily.pm10.find(d => d.day === "2024-04-25")?.avg || 0;
-    const pm25avg = aqiData.forecast.daily.pm25.find(d => d.day === "2024-04-25")?.avg || 0;
-    const o3avg = aqiData.forecast.daily.o3.find(d => d.day === "2024-04-25")?.avg || 0;
-
-    return {
-      city: city,
-      temperature,
-      humidity,
-      wind,
-      rain,
-      aqi,
-      dominentpol,
-      pm10avg,
-      pm25avg,
-      o3avg,
-    };
+    return aqiData;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       const message = error.response?.status === 404 ? "City not found" : error.message;

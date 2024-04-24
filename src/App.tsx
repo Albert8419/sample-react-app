@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
-import WeatherCard from "./components/WeatherCard";
+import WeatherCard from "./components/AqiCard";
 
 const App = () => {
   return (
