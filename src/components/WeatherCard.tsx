@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -7,9 +8,17 @@ import {
   Input,
   Button,
 } from "@nextui-org/react";
-import { useState } from "react";
 import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
 import { getWeatherData } from "../api/actions";
+
+interface WeatherData {
+  city: string;
+  temperature: number;
+  humidity: number;
+  wind: number;
+  rain: number;
+  aqi: number;
+}
 
 const WeatherCard: React.FC = () => {
   const [data, setData] = useState<WeatherData>();
@@ -18,23 +27,19 @@ const WeatherCard: React.FC = () => {
   const [error, setError] = useState("");
 
   const handleSearch = () => {
-    console.log("Fetching Weather Data...");
-    console.log(city);
     setLoadingState(true);
     getWeatherData(city)
       .then((res) => {
         setError("");
-        if (res) {
-          console.log(res);
-          setData(res);
-          setLoadingState(false);
-        }
+        setData(res);
       })
       .catch((error) => {
         console.error(error);
-        setLoadingState(false);
         setData(undefined);
-        setError(error);
+        setError("Error fetching weather data");
+      })
+      .finally(() => {
+        setLoadingState(false);
       });
   };
 
@@ -73,6 +78,7 @@ const WeatherCard: React.FC = () => {
         <CardBody>
           <div className="flex flex-col items-center">
             <h1 className="text-3xl font-bold">{data.city}</h1>
+            <p className="text-3xl font-bold">{data.temperature}°C</p>
             {data.temperature > 20 ? (
               <div>
                 <TiWeatherSunny className="w-36 h-36" />
@@ -82,10 +88,10 @@ const WeatherCard: React.FC = () => {
                 <TiWeatherDownpour className="w-36 h-36" />
               </div>
             )}
-            <p className="text-3xl font-bold">{data.temperature}°C</p>
             <p className="text-lg">Humidity: {data.humidity}%</p>
             <p className="text-lg">Wind: {data.wind} km/h</p>
             <p className="text-lg">Rain: {data.rain} %</p>
+            <p className="text-lg">AQI: {data.aqi}</p>
           </div>
         </CardBody>
       ) : (
@@ -100,10 +106,10 @@ const WeatherCard: React.FC = () => {
         <div className="flex flex-col items-left">
           {error && <p className="text-xs text-red-600 ">{error}</p>}
           {data && (
-            <p className="text-xs  text-gray-600 ">Last update successful.</p>
+            <p className="text-xs text-gray-600 ">Last update successful.</p>
           )}
           {!data && (
-            <p className="text-xs  text-gray-600 ">Waiting for input...</p>
+            <p className="text-xs text-gray-600 ">Waiting for input...</p>
           )}
         </div>
       </CardFooter>
@@ -112,3 +118,4 @@ const WeatherCard: React.FC = () => {
 };
 
 export default WeatherCard;
+
