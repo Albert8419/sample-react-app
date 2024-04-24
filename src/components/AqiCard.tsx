@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AQIData, getAQIData } from "../api/actions"; // Updated import
+import { AQIData, getAQIData } from "../api/actions";
 import {
   Card,
   CardHeader,
@@ -11,15 +11,15 @@ import {
 } from "@nextui-org/react";
 import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
 
-const Aqicard: React.FC = () => { // Renamed component
-  const [data, setData] = useState<AQIData>(); // Updated type
+const AqiCard: React.FC = () => {
+  const [data, setData] = useState<AQIData | undefined>();
   const [loadingState, setLoadingState] = useState(false);
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
     setLoadingState(true);
-    getAQIData(city) // Updated function
+    getAQIData(city)
       .then((res) => {
         setError("");
         setData(res);
@@ -27,7 +27,7 @@ const Aqicard: React.FC = () => { // Renamed component
       .catch((error) => {
         console.error(error);
         setData(undefined);
-        setError("Error fetching AQI data"); // Updated error message
+        setError("Error fetching AQI data");
       })
       .finally(() => {
         setLoadingState(false);
@@ -67,19 +67,17 @@ const Aqicard: React.FC = () => { // Renamed component
       {data ? (
         <CardBody>
           <div className="flex flex-col items-center">
-            <h1 className="text-3xl font-bold">{data.city}</h1>
-            <p className="text-3xl font-bold">{data.aqi}</p> {/* Updated data */}
-            {/* Updated condition */}
+            <h1 className="text-3xl font-bold">{city}</h1>
+            <p className="text-3xl font-bold">{data.aqi}</p>
             {data.aqi > 50 ? (
               <TiWeatherDownpour className="w-36 h-36" />
             ) : (
               <TiWeatherSunny className="w-36 h-36" />
             )}
-            <p className="text-lg">Dominent Pollutant: {data.dominentpol}</p>
-            {/* Additional AQI-specific data */}
-            <p className="text-lg">PM10 Avg: {data.pm10avg}</p>
-            <p className="text-lg">PM25 Avg: {data.pm25avg}</p>
-            <p className="text-lg">O3 Avg: {data.o3avg}</p>
+            <p className="text-lg">Dominant Pollutant: {data.dominentpol}</p>
+            <p className="text-lg">PM10 Avg: {data.forecast.daily.pm10[0]?.avg}</p>
+            <p className="text-lg">PM25 Avg: {data.forecast.daily.pm25[0]?.avg}</p>
+            <p className="text-lg">O3 Avg: {data.forecast.daily.o3[0]?.avg}</p>
           </div>
         </CardBody>
       ) : (
@@ -105,4 +103,4 @@ const Aqicard: React.FC = () => { // Renamed component
   );
 };
 
-export default Aqicard;
+export default AqiCard;
