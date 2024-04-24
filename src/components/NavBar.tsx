@@ -5,8 +5,8 @@ const NavBar = () => {
   return (
     <Navbar className="bg-slate-100 h-16">
       <NavbarBrand>
-        <MdApi className="w-8 h-8 text-primary" />
-        <p className="font-bold text-inherit">AQI API</p>
+        <MdApi className="w-10 h-10 text-primary-background" />
+        <p className="font-bold text-inherit">Air Quality Index API</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {/* <NavbarItem>

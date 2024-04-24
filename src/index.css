@@ -6,33 +6,26 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #ffffff;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 #root {
   height: 100%;
 }
+
 html {
   height: 100%;
 }
+
 body {
   height: 100%;
   scrollbar-width: thin;
-  scrollbar-color: #6b7280 #374151;
-}
-body > #root {
-  height: 100vh;
-  width: 100vw;
-}
-
-body {
+  scrollbar-color: #5f8eec #374151;
   margin: 0;
   display: flex;
   place-items: center;
@@ -40,6 +33,10 @@ body {
   width: 100vw;
 }
 
+body > #root {
+  height: 100vh;
+  width: 100vw;
+}
 
 
 

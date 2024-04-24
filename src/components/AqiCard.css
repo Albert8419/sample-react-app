@@ -1,0 +1,127 @@
+.aqi-card {
+  background-color: transparent; /* Card background color */
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 500px; /* Fixed card width */
+  height: 700px; /* Fixed card height */
+  margin: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between main sections */
+  align-items: center;
+  color: #000503;
+  font-size: larger;
+  font-weight: bold;
+  background: url('https://images.unsplash.com/photo-1601297183305-6df142704ea2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+}
+
+.aqi-top-section {
+  width: 100%;
+  text-align: center; /* Center text in top section */
+  margin-bottom: 1rem; /* Space below the top section */
+}
+
+.aqi-middle-section {
+  flex-grow: 2; /* Allow middle section to take up more space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  width: 100%; /* Full width of card */
+  gap: 1rem;
+}
+
+.aqi-bottom-section {
+  flex-grow: 1; /* Allow bottom section to grow but less than middle */
+  width: 100%; /* Full width of card */
+  align-self: stretch; /* Stretch to container width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  padding-top: 0.5rem; /* Space above the search form */
+  
+
+}
+
+.aqi-search-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  width: auto;
+  color: #f8f6f6;
+
+}
+
+.aqi-search-input {
+  border: 3px solid #00ff2a; /* Adjust color to match the design */
+  border-radius: 50px;
+  padding: 1rem;
+  font-size: 1rem;
+  flex-grow: 1;
+  background-color: transparent;
+  color: #0c0c0c;
+}
+
+.aqi-search-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: #131212; /* Adjust color to match the design */
+  color: #00ff2a;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.aqi-search-button:hover {
+  background-color: #358badaf; /* Darker shade for hover effect */
+}
+
+.aqi-search-button.loading {
+  background-color: #358badaf; /* Loading state color */
+}
+
+.aqi-value-city-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.aqi-city-name {
+  font-size: 3rem; /* Larger font size */
+  font-weight: bold;
+  color: #00ff2a; /* White color for contrast */
+}
+
+.aqi-value {
+  font-size: 8rem; /* Larger font size */
+  font-weight: bold;
+  color: #ffffff; /* White color for contrast */
+}
+
+.aqi-details {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #070707; /* White color for contrast */
+  margin-top: 2rem; /* Additional spacing */
+}
+
+.aqi-error {
+  color: #dc3545; /* Error color */
+}
+
+.aqi-prompt {
+  font-size: 1.2rem;
+  color: #fcfafa; /* White color for contrast */
+}
+
+.aqi-footer {
+  font-size: 1rem;
+  color: #faf9f9; /* White color for contrast */
+}
